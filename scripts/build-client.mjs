@@ -54,6 +54,11 @@ export const FRAGMENTS = [
   'file-import.js', // FileImportPanel（「从文件导入」折叠区：上传 / 路径浏览 / 预览 / 目录批处理）
   'lib/footer-layout.mjs', // footer 车道量法与形态判定（宿主侧模块原样内联，测试直接 import）
   'footer.js',    // LogoIcon / 设置导航图标
+  'chatgpt-archive-styles.js', // ChatGPT archive layout, including host window chrome clearance
+  'chatgpt-library-styles.js', // Typed search, research report cards and declarative components
+  'chatgpt-rich.js', // Local document reading and archive widget controls
+  'chatgpt-search.js', // Scoped archive search dialog
+  'chatgpt-archive.js', // ChatGPT folder archive and project browser; host-native continuation
   'entry.js',     // ImportButton + apply()（槽注册、tab 类型注册）
 ]
 

@@ -160,6 +160,7 @@
     const inject = ["slots", "locale", "sidebarRightTabs"];
 
     function apply(ctx) {
+      registerArchiveClient(ctx);
       // 交给 settings.js 的传输层：0.1.7 的设置值走客户端 configForms，需要客户端 ctx。
       setClientHostCtx(ctx);
       // locale 服务（@deepseek-ai/dsh-client-locale）：已声明进 inject，apply 期就绪；

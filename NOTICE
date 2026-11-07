@@ -1,0 +1,15 @@
+GPT2DSH
+
+Based on dsh-chat-import: https://github.com/Nwflower/dsh-chat-import
+Copyright (c) 2026 Nwflower
+Copyright (c) 2026 Scarlett
+Original MIT notices are retained in LICENSE.
+
+GPT2DSH adds local ChatGPT archive browsing, typed search, report restoration,
+document extraction and declarative component rendering.
+Copyright (c) 2026 GPT2DSH contributors.
+
+Dependencies and inherited artwork retain their own copyrights and licenses.
+See THIRD_PARTY_NOTICES.md and third_party/licenses, including the separately
+identified Zed source icon. GPT2DSH is independently maintained and is not
+affiliated with OpenAI, DeepSeek or the displayed third-party brands.

@@ -1,6 +1,110 @@
 # Changelog
 
-All notable changes to `dsh-chat-import` are documented here, newest first.
+GPT2DSH changes appear first, followed by the inherited public `dsh-chat-import` changelog. Historical upstream attribution and comparison links are preserved; see [UPSTREAM.md](UPSTREAM.md). The compatibility package identifier remains `dsh-chat-import`.
+
+## [Unreleased: 0.26.4-chatgpt.5]
+
+[中文](#cn-0.26.4-chatgpt.5) | [English](#en-0.26.4-chatgpt.5)
+
+<h3 id="cn-0.26.4-chatgpt.5">新增功能</h3>
+
+- 档案搜索改为分类弹窗：全部、聊天、附件、图片、文档、页面、项目，可限定标题 / 文件名或正文，保留多关键词命中排序与上下文高亮。
+- Deep Research 报告从导出的附件中恢复，按原会话关联显示为可展开的报告卡片，支持正文检索、来源链接、Markdown 下载及续聊上下文。
+- 本地 PDF 文本层、DOCX / XLSX / PPTX 和文本类附件在后台建立内存索引；未索引、部分索引和仅文件名检索都有明确标记。
+- 支持导出的参数卡片、循环表格、勾选矩阵、表单和滑块；复制操作使用实际选择值，续聊表单生成未发送的提示词草稿。
+
+### 问题修复
+
+- 修复报告缺席、声明式组件显示成原始代码，以及卡片按钮文字对比和 Markdown 字号受宿主样式覆盖的问题。不支持的组件保留可展开源码与原因。
+
+<h3 id="en-0.26.4-chatgpt.5">New Features</h3>
+
+- Add a search dialog with all, chat, attachment, image, document, page and project scopes, title/body filters, keyword-coverage ranking and highlighted excerpts.
+- Restore exported Deep Research reports to their originating chats with full-text search, source links, expanded reading, Markdown download and continuation context.
+- Index local PDF text, DOCX / XLSX / PPTX and text attachments in memory, with explicit pending, partial and filename-only states.
+- Render supported exported cards, looped tables, checkbox matrices, forms and sliders. Copy reflects current selections; continuation forms prepare an unsent draft.
+
+### Bug Fixes
+
+- Restore missing report cards and declarative components, and correct inherited Markdown font sizes and button contrast. Unsupported components retain expandable source and an explanation.
+
+## [Unreleased: 0.26.4-chatgpt.4]
+
+[中文](#cn-0.26.4-chatgpt.4) | [English](#en-0.26.4-chatgpt.4)
+
+<h3 id="cn-0.26.4-chatgpt.4">新增功能</h3>
+
+- 档案搜索按空白拆分关键词，任意词命中即可召回；按不同命中词数、标题命中词数和更新时间依次排序，支持词语分散在不同消息或分支。
+- 结果显示命中比例与关键词，标题及上下文片段高亮。重复词不加权，英文大小写不影响结果，全量排序后再分页。
+- 保持本地搜索，复用已有分词及高亮模块，不引入模型调用或磁盘全文副本。
+
+<h3 id="en-0.26.4-chatgpt.4">New Features</h3>
+
+- Search archives with whitespace-separated terms, matching any term across messages or branches. Rank by distinct-term coverage, title matches and recency before pagination.
+- Show coverage counts, matched terms, highlighted titles and context excerpts. Repeated terms do not boost rank, and matching is case-insensitive.
+- Reuse existing tokenization and highlighting, keeping search local without a model call or an on-disk transcript copy.
+
+Local enhancement package; not an upstream release.
+
+## [Unreleased: 0.26.4-chatgpt.3]
+
+[中文](#cn-0.26.4-chatgpt.3) | [English](#en-0.26.4-chatgpt.3)
+
+<h3 id="cn-0.26.4-chatgpt.3">体验优化</h3>
+
+- 项目在侧栏内独立展开或收起，显示缩进的单行会话、当前会话高亮与展开箭头；初始展示 5 条最近会话，「显示更多」可继续查看较早记录。
+- 侧栏统一滚动。收起项目保留正文与阅读位置；顶部搜索覆盖全部项目。重命名移动至项目行的悬停菜单。
+- 支持键盘展开收起、菜单 Escape 与减少动态效果偏好。保持原有附件、分支和原生续聊能力。
+
+<h3 id="en-0.26.4-chatgpt.3">Improvements</h3>
+
+- Expand projects inline into compact, indented chat lists with active-chat highlighting and independent disclosure. Show five recent chats initially and load older entries on demand.
+- Use a single scrolling sidebar. Collapsing a project preserves the reader and scroll position; global search covers all projects and the hover menu provides renaming.
+- Support keyboard disclosure, menu dismissal and reduced-motion preferences while retaining attachment viewing, branches and native continuation.
+
+Local enhancement package; not an upstream release.
+
+## [Unreleased: 0.26.4-chatgpt.2]
+
+[中文](#cn-0.26.4-chatgpt.2) | [English](#en-0.26.4-chatgpt.2)
+
+<h3 id="cn-0.26.4-chatgpt.2">问题修复</h3>
+
+- 档案层避开 Windows 标题栏；项目与历史列表合并为侧栏，长名称、附件操作和窄窗口不再互相挤压。备份路径收进「备份管理」。
+- 本地图片自动预览；按文件 ID 合并同一消息中的重复附件，保留名称和类型信息，支持查看大图与保存。
+- 识别对话内嵌的项目名称及更多 `projects.json` 结构；未导出原名的项目暂用组内对话标题并标注「暂名」，保留本地改名。
+
+<h3 id="en-0.26.4-chatgpt.2">Bug Fixes</h3>
+
+- Reserve the desktop title bar and use a two-column archive layout with wrapping project names, bounded attachment labels and responsive controls.
+- Preview local images automatically and merge duplicate attachment references within each message while preserving their metadata.
+- Recover explicit project names from conversation metadata or project manifests; use clearly marked conversation-title fallbacks where names are absent, preserving local overrides.
+
+Local enhancement package; no upstream release or public comparison tag.
+
+## [Unreleased: 0.26.4-chatgpt.1]
+
+[中文](#cn-0.26.4-chatgpt.1) | [English](#en-0.26.4-chatgpt.1)
+
+<h3 id="cn-0.26.4-chatgpt.1">新增功能</h3>
+
+- 本地增强分支：从 Harness 侧栏打开 ChatGPT 备份档案，原位读取已解压的单文件及分片导出，支持全文搜索、项目分组及命名、分支浏览、图片与附件、Pages 文字和 Sites 元数据。
+- 所选分支经原有去重与持久化管线导入原生会话，使用 Harness 模型菜单切换模型继续聊天；不同分支使用独立会话标识，同一分支再次打开保留续聊内容。
+
+### 问题修复
+
+- ChatGPT 转换器优先尊重 `current_node`，保留仅含图片的用户回合，并为孤立工具结果生成可读文本步骤。
+
+<h3 id="en-0.26.4-chatgpt.1">New Features</h3>
+
+- Local fork: browse extracted ChatGPT exports in place with full-text search, project naming, branch selection, local attachments, Pages text and Sites metadata.
+- Continue the chosen branch in native Harness sessions using upstream deduplication and persistence. Harness owns provider credentials and model switching; separate branches retain independent identities.
+
+### Bug Fixes
+
+- Respect `current_node`, retain image-only user turns, and preserve orphan tool output as readable text steps.
+
+This local prerelease is not published upstream. Base: [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import).
 
 ## [Unreleased]
 

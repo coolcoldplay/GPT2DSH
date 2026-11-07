@@ -34,7 +34,7 @@ test('面板请求统一走 postJson：bundle 里只剩一处 fetch，不再到�
   // 每个路由都经 postJson（数一数调用点，防止有人绕开助手另写 fetch）
   for (const route of ['/api-import/sessions', '/api-import/import', '/api-import/history', '/api-import/purge',
     '/api-import/workspaces/cleanup', '/api-import/uploads', '/api-import/prefs', '/api-import/file',
-    '/api-import/upload/init', '/api-import/upload/chunk', '/api-import/upload/complete']) {
+    '/api-import/upload/init', '/api-import/upload/chunk', '/api-import/upload/complete', '/api-import/chatgpt-archive']) {
     assert.ok(source.includes('postJson("' + route + '"') || source.includes('runAction("' + route + '"'), route + ' 应经 postJson / runAction')
   }
 })
@@ -53,6 +53,8 @@ test('postJson：POST JSON 体，返回 { ok, data, error, status }', async () =
   assert.equal(calls[0].init.body, '{"a":1}')
   await postJson('/api-import/y')
   assert.equal(calls[1].init.body, '{}', '无请求体时发空对象')
+  await postJson('/api-import/chatgpt-archive', {}, undefined, { 'X-DSH-Archive': '1' })
+  assert.equal(calls[2].init.headers['X-DSH-Archive'], '1')
 })
 
 test('postJson：服务端失败带 error 文本；空 / 非 JSON 响应给 data=null；网络层失败照常 reject', async () => {

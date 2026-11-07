@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## GPT2DSH publication rules
+
+This is the GPT2DSH derivative documented in UPSTREAM.md. Preserve upstream attribution and third-party notices. Internal dsh-chat-import identifiers remain for compatibility. Never commit private exports, attachments, personal screenshots, credentials, local state or real transcript fixtures. Use synthetic examples and GitHub noreply authorship. The inherited release instructions below describe upstream's npm workflow; GPT2DSH has `private: true` and builds GitHub artifacts only. Do not publish to the upstream npm package.
+
 `dsh-chat-import` 是 DeepSeek Harness（DSH）插件：把 34 种来源格式（含 DSH 自身的会话日志）的聊天记录导入为可继续的 DSH 会话，支持反向导出。
 
 ## 原则

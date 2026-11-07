@@ -1,4 +1,6 @@
-# Contributing to dsh-chat-import
+# Contributing to GPT2DSH
+
+GPT2DSH retains the upstream plugin's engineering conventions below. Read [UPSTREAM.md](../UPSTREAM.md), [third-party notices](../THIRD_PARTY_NOTICES.md) and [privacy rules](PRIVACY.md) before contributing. Use synthetic fixtures only. Installation and project links are in the root README; inherited general-tool documentation may still use the compatible `dsh-chat-import` identifier. This fork does not publish to the upstream npm package.
 
 Thanks for considering a contribution. `dsh-chat-import` imports conversation
 history from other agents into DeepSeek Harness as full-fidelity, resumable
@@ -9,8 +11,7 @@ plugin constraints, quality conventions — live in [AGENTS.md](../AGENTS.md).
 ## Dev setup
 
 - **Node.js >= 22.13**, the first release where `node:sqlite` works without a flag
-- `npm ci` installs the dependencies. There are no runtime dependencies; peers are
-  installed automatically.
+- `npm ci` installs document parsing libraries, development dependencies and host peers.
 - `npm test` runs the `node:test` suite: converter unit tests, export unit tests,
   and host-mock integration tests
 - `npm run check:linux` is the cross-platform path-discipline guard, also enforced

@@ -43,10 +43,10 @@ function argOf(flag) {
 
 // 仓库的 compare 基址取自 package.json，校验里不写死 owner/repo；读不到就跳过链接比对，
 // 其余版式校验照做（脚本仍可用于别的 checkout）。
-function compareBase() {
+function compareBase(upstream = false) {
   try {
     const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
-    const url = typeof pkg.repository === 'string' ? pkg.repository : pkg.repository && pkg.repository.url
+    const url = upstream ? pkg.gpt2dsh?.upstream?.repository : typeof pkg.repository === 'string' ? pkg.repository : pkg.repository && pkg.repository.url
     const m = /github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?$/.exec(String(url || ''))
     return m ? `https://github.com/${m[1]}/${m[2]}` : null
   } catch (_) {
@@ -97,7 +97,9 @@ if (nextVersion && previous !== nextVersion[1]) {
   fail(`Full Changelog 的上一版应为下一节版本 ${nextVersion[1]}，实际是 ${previous}`)
 }
 const base = compareBase()
-if (base && footerUrl !== `${base}/compare/v${previous}...v${version}`) {
+// The retained historical changelog belongs to upstream; arbitrary input files still use this repository.
+const historicalBase = changelogPath === resolve(ROOT, 'CHANGELOG.md') ? compareBase(true) : null
+if (base && ![base, historicalBase].filter(Boolean).some(url => footerUrl === `${url}/compare/v${previous}...v${version}`)) {
   fail(`Full Changelog 链接应为 ${base}/compare/v${previous}...v${version}，实际是 ${footerUrl}`)
 }
 

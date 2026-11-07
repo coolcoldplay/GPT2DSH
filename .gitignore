@@ -21,3 +21,28 @@ node_modules/
 
 # npm pack 发布产物（上传到 GitHub Release，不入库）
 *.tgz
+
+# Never publish private exports, personal verification artifacts or host state.
+harness-dev/
+deliverables/
+backups/
+exports/
+private/
+.dsh/
+.playwright-cli/
+output/
+dist/
+coverage/
+.env
+.env.*
+*.pem
+*.key
+*.dat
+*.bundle
+*.zip
+chatgpt-archives.json
+library_files.json
+user.json
+conversations.json
+conversations-*.json
+chat.html

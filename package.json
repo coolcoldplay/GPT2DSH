@@ -1,7 +1,7 @@
 {
   "name": "dsh-chat-import",
-  "description": "Import conversation history from 25+ AI coding agents into DeepSeek Harness as resumable sessions — tool calls, reasoning and results kept intact, with reverse export. | 把 25+ AI 编程 Agent 的聊天记录导入 DeepSeek Harness 继续对话，保留工具调用、推理与结果，支持反向导出。",
-  "version": "0.26.4",
+  "description": "GPT2DSH: browse and search ChatGPT exports locally, restore research reports, and continue conversations in DeepSeek Harness. | 本地浏览与搜索 ChatGPT 备份，恢复研究报告，在 DeepSeek Harness 中切换模型继续聊。",
+  "version": "0.26.4-chatgpt.5",
   "type": "module",
   "main": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
@@ -41,7 +41,11 @@
     "assets/import.svg",
     "assets/dci-promo.png",
     "assets/agents",
-    "LICENSE"
+    "LICENSE",
+    "UPSTREAM.md",
+    "THIRD_PARTY_NOTICES.md",
+    "NOTICE",
+    "third_party/licenses"
   ],
   "dsh": {
     "bundle": {
@@ -93,13 +97,13 @@
     "transcript"
   ],
   "author": "Nwflower <1679659@qq.com>",
-  "homepage": "https://github.com/Nwflower/dsh-chat-import",
+  "homepage": "https://github.com/coolcoldplay/GPT2DSH",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nwflower/dsh-chat-import.git"
+    "url": "git+https://github.com/coolcoldplay/GPT2DSH.git"
   },
   "bugs": {
-    "url": "https://github.com/Nwflower/dsh-chat-import/issues"
+    "url": "https://github.com/coolcoldplay/GPT2DSH/issues"
   },
   "engines": {
     "node": ">=22.13"
@@ -124,9 +128,20 @@
     "eslint": "^10.8.1"
   },
   "dependencies": {
-    "fzstd": "^0.1.1"
+    "acorn": "8.19.0",
+    "fflate": "0.8.3",
+    "fzstd": "^0.1.1",
+    "pdfjs-dist": "6.5.438"
   },
   "overrides": {
     "js-yaml": "4.3.2"
+  },
+  "private": true,
+  "gpt2dsh": {
+    "upstream": {
+      "repository": "https://github.com/Nwflower/dsh-chat-import",
+      "commit": "c1c4f627d03d95a60dd8bade12212150ed8af276"
+    },
+    "compatibilityPackage": "dsh-chat-import"
   }
 }
