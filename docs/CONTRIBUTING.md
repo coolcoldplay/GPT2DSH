@@ -11,6 +11,8 @@ plugin constraints, quality conventions — live in [AGENTS.md](../AGENTS.md).
 ## Dev setup
 
 - **Node.js >= 22.13**, the first release where `node:sqlite` works without a flag
+- Use **npm 11.12.1** when updating `package-lock.json`; CI pins the same version.
+  Harness integration tests run on Node.js 24 because the current host CLI requires it.
 - `npm ci` installs document parsing libraries, development dependencies and host peers.
 - `npm test` runs the `node:test` suite: converter unit tests, export unit tests,
   and host-mock integration tests
@@ -56,19 +58,13 @@ the version so several sections can share one page.
 
 ## Releases
 
-A release starts from a tag the maintainer pushes (`git push --follow-tags`). That
-commit already carries the version's CHANGELOG section and the bumped
-`package.json`. `.github/workflows/release.yml` then runs on the tag and checks that
-the tag names `package.json`'s version and that the commit is on `main`. It
-validates the CHANGELOG section with
-`node scripts/release-notes.mjs --version x.y.z --check` (the same script prints
-the notes), runs the full gate set, publishes to npm from the tag with trusted
-publishing and provenance (no stored token), and creates or updates the GitHub
-Release from that section.
-
-There is no local publish step. Rerunning the workflow skips a version already on
-npm, and dispatching it by hand (one `tag` input) validates every step without
-publishing.
+GPT2DSH distributes source builds and does not publish to the upstream npm
+namespace. `package.json` has `private: true` to enforce this boundary.
+The manual **build-plugin** workflow in `.github/workflows/release.yml` runs
+tests, lint, the leak scan and build checks, then uploads an installable `.tgz`
+as a GitHub Actions artifact. It does not publish to npm or create a release.
+Only files declared in the package allowlist are packed; private backups,
+local configuration and the `dev/` directory must never be included.
 
 ## Commits & PRs
 

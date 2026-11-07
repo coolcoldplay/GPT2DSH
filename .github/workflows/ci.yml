@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # Keep the lockfile serializer consistent with the development toolchain.
+      - run: npm install --global npm@11.12.1 --no-audit --no-fund
       # 严格按 package-lock.json 复现依赖树（与 npm install 不同，lockfile 与 package.json 不一致时直接失败）
       - run: npm ci --no-audit --no-fund
       # 全套测试 + 覆盖率护栏一步完成：npm run coverage 跑的就是 npm test 的同一批文件
@@ -78,16 +80,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # The current Harness CLI requires Node >= 24.9.0.
+          node-version: 24
           cache: npm
+      - run: npm install --global npm@11.12.1 --no-audit --no-fund
       # dsh plugin 子命令在 profile 目录内转发 pnpm；ubuntu 镜像不自带 pnpm，显式安装。
-      # @deepseek-ai/dsh 装 npm latest（当前 0.2.x）——冒烟对象就是"最新发布的 dsh"。
+      # Explicit @latest resolves the registry tag even while every release is a prerelease.
       - name: Install dsh CLI (latest) and pnpm
         run: |
-          npm i -g @deepseek-ai/dsh
+          npm i -g @deepseek-ai/dsh@latest
           npm i -g pnpm@11
       # 插件 peer（@deepseek-ai/dsh-tools）按插件真实路径（checkout）解析，缺 checkout
-      # 自己的 node_modules 会 ERR_MODULE_NOT_FOUND——先 npm ci（本仓库零运行时依赖，很快）
+      # 自己的 node_modules 会 ERR_MODULE_NOT_FOUND——先 npm ci 安装锁定的依赖。
       - name: Install checkout deps (peer @deepseek-ai/dsh-tools)
         run: npm ci --no-audit --no-fund
       # CI 测的是 checkout 自身（未发布的版本），用 link 而非 npm 包名；
